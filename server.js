@@ -31,7 +31,7 @@ app.get('/weather', (request, response) => {
     let queryCity = request.query.searchQuery;
     let cityData = data.find(object => object.city_name.toLowerCase() === queryCity.toLowerCase());
     let dailyForecast = cityData.data.map(day => new Forecast(day));
-    response.send(dailyForecast);
+    response.status(200).send(dailyForecast);
   } catch (error) {
     next(error);
   }
