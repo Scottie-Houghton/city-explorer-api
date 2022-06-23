@@ -25,9 +25,11 @@ app.get('/', (request, response) => {
 // });
 
 app.get('/weather', (request, response) => {
-  let cityFromRequest = request.query.city;
-  let dataToSend = data.find(city => city.city_name === cityFromRequest);
-  response.send(dataToSend);
+  let cityFromRequest = request.query.searchQuery;
+  let dataToGroom = data.find(city => city.city_name === cityFromRequest);
+  let dailyForecast = dataToGroom.data.map(day => new Forecast(day));
+  // let dataToSend = new Forecast(dataToGroom.data);
+  response.send(dailyForecast);
 });
 
 app.get('*', (request, response) => {
@@ -35,6 +37,13 @@ app.get('*', (request, response) => {
 });
 
 
+
+class Forecast {
+  constructor(dayObject) {
+    this.date = dayObject.datetime;
+    this.description = dayObject.weather.description;
+  }
+}
 
 
 

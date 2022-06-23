@@ -20,9 +20,12 @@ Express JS, dotenve and nodemon.
 ## Change Log
 * 06-21-2022 11:30pm - Application now has a fully-functional express server, with a GET route for the location resource.
 
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps.
+<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. -->
 
 ## Credit and Collaborations
+* Lab 07 Partner: Matthew Larkin
+![Lab 07](./images/lab07-WRRC.jpg)
+
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
 ## Lab: Class 07 - Custom Servers with Node and Express
