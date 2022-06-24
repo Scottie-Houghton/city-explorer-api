@@ -26,25 +26,16 @@ app.get('/', (request, response) => {
 //   response.send(`Hello, ${name}!`);
 // });
 
-// app.get('/daily', async (request, response) => {
-//   let searchQueryFromFrontEnd = request.query.searchQuery;
-//   let url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${searchQueryFromFrontEnd}&key=${process.env.WEATHERBIT_API_KEY}`;
-//   let results = await axios.get(url);
-//   console.log(results.data);
-//   response.sendStatus('hi');
-// });
-
 app.get('/weather', async (request, response) => {
   try {
-    let queryCity = request.query.searchQuery;
-    let url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${queryCity}&key=${process.env.WEATHERBIT_API_KEY}`;
+    let lat = request.query.lat;
+    let lon = request.query.lon;
+    let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&units=I&days=5&lat=${lat}&lon=${lon}`;
     let results = await axios.get(url);
-
-    let cityData = results.find(object => object.city_name.toLowerCase() === queryCity.toLowerCase());
-    let dailyForecast = cityData.data.map(day => new Forecast(day));
+    let dailyForecast = results.data.data.map(day => new Forecast(day));
     response.status(200).send(dailyForecast);
   } catch (error) {
-    next(error);
+    response.send(error);
   }
 });
 
@@ -63,7 +54,7 @@ class Forecast {
 
 
 
-app.use((error, request, response, next) => {
+app.use((error, request, response) => {
   response.status(500).send(error.message);
 });
 
