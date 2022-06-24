@@ -39,6 +39,18 @@ app.get('/weather', async (request, response) => {
   }
 });
 
+// app.get('/movies', async (request, response) => {
+//   try {
+//     let queryCity = request.query.query;
+//     let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${queryCity}`;
+//     let results = await axios.get(url);
+//     let dailyForecast = results.data.data.map(day => new Forecast(day));
+//     response.status(200).send(dailyForecast);
+//   } catch (error) {
+//     response.send(error);
+//   }
+// });
+
 app.get('*', (request, response) => {
   response.status(404).send('The thing you are looking for doesn\'t esist');
 });
@@ -51,6 +63,13 @@ class Forecast {
     this.description = dayObject.weather.description;
   }
 }
+
+// class Forecast {
+//   constructor(dayObject) {
+//     this.date = dayObject.datetime;
+//     this.description = dayObject.weather.description;
+//   }
+// }
 
 
 
