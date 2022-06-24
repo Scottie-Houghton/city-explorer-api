@@ -1,12 +1,12 @@
 'user strict';
 
 // console.log('my first server');
-
-const express = require('express');
 require('dotenv').config();
-let data = require('./data/weather.json');
-
+const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
+
+// let data = require('./data/weather.json');
 
 
 const app = express();
@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3002;
 
 
 app.get('/', (request, response) => {
-  response.send('hello from our server!');
+  response.status(200).send('hello from our server!');
 });
 
 // app.get('/hello', (request, response) => {
@@ -26,19 +26,21 @@ app.get('/', (request, response) => {
 //   response.send(`Hello, ${name}!`);
 // });
 
-app.get('/weather', (request, response) => {
+app.get('/weather', async (request, response) => {
   try {
-    let queryCity = request.query.searchQuery;
-    let cityData = data.find(object => object.city_name.toLowerCase() === queryCity.toLowerCase());
-    let dailyForecast = cityData.data.map(day => new Forecast(day));
+    let lat = request.query.lat;
+    let lon = request.query.lon;
+    let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&units=I&days=5&lat=${lat}&lon=${lon}`;
+    let results = await axios.get(url);
+    let dailyForecast = results.data.data.map(day => new Forecast(day));
     response.status(200).send(dailyForecast);
   } catch (error) {
-    next(error);
+    response.send(error);
   }
 });
 
 app.get('*', (request, response) => {
-  response.send('The thing you are looking for doesn\'t esist');
+  response.status(404).send('The thing you are looking for doesn\'t esist');
 });
 
 
@@ -52,7 +54,7 @@ class Forecast {
 
 
 
-app.use((error, request, response, next) => {
+app.use((error, request, response) => {
   response.status(500).send(error.message);
 });
 
