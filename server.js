@@ -39,17 +39,17 @@ app.get('/weather', async (request, response) => {
   }
 });
 
-// app.get('/movies', async (request, response) => {
-//   try {
-//     let queryCity = request.query.query;
-//     let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${queryCity}`;
-//     let results = await axios.get(url);
-//     let dailyForecast = results.data.data.map(day => new Forecast(day));
-//     response.status(200).send(dailyForecast);
-//   } catch (error) {
-//     response.send(error);
-//   }
-// });
+app.get('/movies', async (request, response) => {
+  try {
+    let queryCity = request.query.searchQuery;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${queryCity}&include_adult=false`;
+    let cityMovies = await axios.get(url);
+    let moviesArray = cityMovies.data.results.map(movie => new Movies(movie));
+    response.status(200).send(moviesArray);
+  } catch (error) {
+    response.send(error);
+  }
+});
 
 app.get('*', (request, response) => {
   response.status(404).send('The thing you are looking for doesn\'t esist');
@@ -64,12 +64,13 @@ class Forecast {
   }
 }
 
-// class Forecast {
-//   constructor(dayObject) {
-//     this.date = dayObject.datetime;
-//     this.description = dayObject.weather.description;
-//   }
-// }
+class Movies {
+  constructor(movieObj) {
+    this.title = movieObj.title;
+    this.description = movieObj.overview ? movieObj.overview : 'Movie setting: Seattle';
+    this.src = movieObj.poster_path ? movieObj.poster_path : './public/images/movie-reel.png';
+  }
+}
 
 
 
