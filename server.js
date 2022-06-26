@@ -73,7 +73,6 @@ class Movies {
 }
 
 
-
 app.use((error, request, response) => {
   response.status(500).send(error.message);
 });
