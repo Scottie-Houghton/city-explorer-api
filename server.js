@@ -4,7 +4,9 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios');
+
+const getWeather = require('./modules/weather.js');
+const getMovies = require('./modules/movies.js');
 
 // let data = require('./data/weather.json');
 
@@ -20,57 +22,14 @@ app.get('/', (request, response) => {
   response.status(200).send('hello from our server!');
 });
 
-// app.get('/hello', (request, response) => {
-//   console.log(request.query.name);
-//   let name = request.query.name;
-//   response.send(`Hello, ${name}!`);
-// });
+app.get('/weather', getWeather);
 
-app.get('/weather', async (request, response) => {
-  try {
-    let lat = request.query.lat;
-    let lon = request.query.lon;
-    let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&units=I&days=5&lat=${lat}&lon=${lon}`;
-    let results = await axios.get(url);
-    let dailyForecast = results.data.data.map(day => new Forecast(day));
-    response.status(200).send(dailyForecast);
-  } catch (error) {
-    response.send(error);
-  }
-});
-
-app.get('/movies', async (request, response) => {
-  try {
-    let queryCity = request.query.searchQuery;
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${queryCity}&include_adult=false`;
-    let cityMovies = await axios.get(url);
-    let moviesArray = cityMovies.data.results.map(movie => new Movies(movie));
-    response.status(200).send(moviesArray);
-  } catch (error) {
-    response.send(error);
-  }
-});
+app.get('/movies', getMovies);
 
 app.get('*', (request, response) => {
   response.status(404).send('The thing you are looking for doesn\'t esist');
 });
 
-
-
-class Forecast {
-  constructor(dayObject) {
-    this.date = dayObject.datetime;
-    this.description = dayObject.weather.description;
-  }
-}
-
-class Movies {
-  constructor(movieObj) {
-    this.title = movieObj.title;
-    this.description = movieObj.overview ? movieObj.overview : 'Movie setting: Seattle';
-    this.src = movieObj.poster_path ? movieObj.poster_path : './public/images/movie-reel.png';
-  }
-}
 
 
 app.use((error, request, response) => {

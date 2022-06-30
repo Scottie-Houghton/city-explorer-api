@@ -26,6 +26,8 @@ Express JS, dotenve and nodemon.
 
 * 06-24-2022 6:45pm - Attempted to get Movies API data to render on my front end by setting up the route and class.
 
+* 06-29-2022 10:30pm - Refactored my server and modularized the functions and classes into two separate JS files for the weather and the movies and put them in a modules folder. Practiced refactoring the try / catch in my Movie module JS file.
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. -->
 
 ## Credit and Collaborations
@@ -33,7 +35,10 @@ Express JS, dotenve and nodemon.
 ![Lab 07](./images/lab07-WRRC.jpg)
 
 * Lab 08 Partner: Kris Dunning
-![Lab 08](.images/lab08-WRRC.jpg)
+![Lab 08](./images/lab08-WRRC.jpg)
+
+* Lab 09 Partner: Brentice Loper
+![Lab 09](./images/lab09-WRRC.jpg)
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
@@ -64,3 +69,13 @@ Finish time:
 * 06-25-2022: 5:30pm
 
 Actual time needed to complete: 7.5 hours
+
+## Lab: Class 09 - Refactoring into Modules
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 9:30pm
+
+Finish time: 10:30pm
+
+Actual time needed to complete: 1 hour
