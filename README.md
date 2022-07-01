@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Scottie Houghton
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.3 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 A server to store weather data that can be requested by the City Explorer application.
@@ -9,7 +9,7 @@ A server to store weather data that can be requested by the City Explorer applic
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
 ## Getting Started
-Express JS, dotenve and nodemon.
+* Express JS, dotenve and nodemon.
 
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
@@ -28,6 +28,8 @@ Express JS, dotenve and nodemon.
 
 * 06-29-2022 10:30pm - Refactored my server and modularized the functions and classes into two separate JS files for the weather and the movies and put them in a modules folder. Practiced refactoring the try / catch in my Movie module JS file.
 
+* 06-30-2022 10:00pm - Added a cache to the movies module.
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. -->
 
 ## Credit and Collaborations
@@ -39,6 +41,9 @@ Express JS, dotenve and nodemon.
 
 * Lab 09 Partner: Brentice Loper
 ![Lab 09](./images/lab09-WRRC.jpg)
+
+* Lab 10 Partner: Dennis Devries
+![Lab 10](./images/lab10-WRRC.jpg)
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
@@ -79,3 +84,13 @@ Start time: 9:30pm
 Finish time: 10:30pm
 
 Actual time needed to complete: 1 hour
+
+## Lab: Class 10 - Caching
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 8:30pm
+
+Finish time: 10:00pm
+
+Actual time needed to complete: 1.5 hours
